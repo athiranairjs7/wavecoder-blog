@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CRUD operation using AJAX-Laravel8 Bootstrap , jQuery, and Ajax"/>
+    <meta name="keywords" content="CRUD,AJAX,LARAVEL,ADD,UPDATE,DELETE,CREATE,READ,RESOURCE,ROUTE" />
+    <title>AJAX-Laravel | CRUD</title>
+    <link rel="icon" href="images/WAVe CODER.png">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <!-- css -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- js -->
+    <script src="script/main.js"></script>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/745e131cff.js" crossorigin="anonymous"></script>
+    <!-- font -->
+    <style>
+     @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,500;1,300;1,400;1,500&display=swap');
+    </style>
+</head>
+<body>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand text-light d-flex" href="#">
+          <img src="./images/logo.png" alt="" class="rounded-circles">
+        </a>
+      </div>
+    </nav>
+   
+    <div class="section" id="top">
+      <h3 class="text-header">AJAX-Laravel CRUD Operation</h3>
+      <p class="text-body pt-3">In this tutorial, we'll learn to build a CRUD example with Laravel 8, Bootstrap , jQuery, and Ajax.
+        We'll see by example how to perform Ajax CRUD operations in Laravel 8 with a bootstrap modal, Yajra datatable and pagination.<p>
+      <p class="text-body">We'll be using the jQuery ajax() method for sending Ajax requests and yajra datatable for creating a datatable.</p>
+      <h5 class="text-sub-header pt-3 pb-5">Steps for CRUD Operation</h5>
+      <table class="table  table-striped mb-5">
+         <tr>
+           <td>Step 1</td>
+           <td><a href="#one">Installing Laravel 8</a></td>
+           <td>Step 5</td>
+           <td><a href="#five">Creating Controller and Model</a></td>
+         </tr>
+         <tr>
+           <td>Step 2</td>
+           <td> <a href="#two">Installing Yajra Datatable</a></td>
+           <td>Step 6</td>
+           <td><a href="#six">Adding a Laravel 8 Route</a></td>
+         </tr>
+         <tr>
+           <td>Step 3</td>
+           <td><a href="#three"> Configuring a MySQL Database</a></td>
+           <td>Step 7</td>
+           <td><a href="#seven">Adding a Blade Template View</a></td>
+         </tr>
+         <tr>
+           <td>Step 4</td>
+           <td><a href="#four">Creating a Laravel  Migration</a></td>
+           <td>Step 8</td>
+           <td><a href="#eight">Serving the Laravel  Application</a></td>
+         </tr>
+      </table>
+    </div>
+    <!-- end of section -->
+    <div class="content">
+      <div class="content-one" id="one">
+        <h6 class="pb-3 pt-3">Step 1 : Installing Laravel 8</h6>
+         <div class="card ">
+          <div class="card-body">Open command line interface and write the following command to create a project Customer-CRUD<p></p></div>
+          <div class="card-footer">
+            <div class="row">
+            <div class="col-10"><p id="copy">composer create-project --prefer-dist laravel/laravel Customer-CRUD</p></div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-two" id="two">
+        <h6 class="pb-3 pt-5">Step 2 : Installing Yajra Datatable</h6>
+         <div class="card">
+          <div class="card-body">Open the project in your IDE.<br> <br>Now install Yajra datatable using the following command.<p></p></div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col-10"><p id="copytwo">composer require yajra/laravel-datatables-oracle</p></div>
+              
+            </div>
+            
+          </div>
+        </div>
+        <p class="pb-3 pt-5" >Now go to config folder open app.php file add the following command in providers and aliases arrays</p>
+        <div class="card">
+          <div class="card-body">'providers'  =>  [<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Yajra\DataTables\DataTablesServiceProvider::class,<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                ]<br><br>
+        
+                     'aliases'  =>  [<br>
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      'DataTables'  =>  Yajra\DataTables\Facades\DataTables::class,<br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]
+          </div>
+        </div>
+      </div>
+
+      <div class="content-three" id="three">
+        <h6 class="pb-3 pt-5">Step 3 :  Configuring a MySQL Database</h6>
+         <div class="card">
+          <div class="card-body">Create a new database in PhpMyAdmin<p>open .env file and enter the database name in .env file.</p>
+              <p>DB_CONNECTION=mysql<br>
+                DB_HOST=127.0.0.1<br>
+                DB_PORT=3306<br>
+                DB_DATABASE=your_database_name<br>
+                DB_USERNAME= root<br>
+                DB_PASSWORD= </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-four" id="four">
+        <h6 class="pb-3 pt-5">Step 4 :  Creating a Laravel 8 Migration</h6>
+         <div class="card">
+          <div class="card-body">
+            <p> Create a Migration for Customer table using following command and open database folder -> migration folder to see the created migratation file</p>
+          </div>
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-10"><p id="copyfour">php artisan make:migration create_Customer_table</p></div>
+            </div>
+        </div>
+        </div>
+        <p class="pb-3 pt-5" >Open the migration file created and enter the column name and type</p>
+        <div class="card">
+          <div class="card-body">
+            <code>
+            public  function up(){<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Schema::create('Customers',  function  (Blueprint $table)  {<br>
+                <div style="margin-left: 10%; letter-spacing:1px">
+                  $table->bigIncrements('id');<br>
+                  $table->string('firstName');<br>
+                  $table->string('lastName');<br>
+                  $table->text('info');<br>
+                  $table->timestamps();<br>
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});<br>
+          }<br><br>
+          public  function down(){<br>
+            <div style="margin-left: 10%;">Schema::dropIfExists('Customers');</div>
+        }</code><br>
+        <p class="pt-3">Now you can create the table in the database by running the following command</p>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col-10"><p id="copyfourone">php artisan migrate</p></div>
+          </div>
+          </div>
+        </div>
+      </div>
+    
+    <div class="content-five" id="five">
+      <h6 class="pb-3 pt-5">Step 5 : Creating a Controller </h6>
+      <div class="card">
+       <div class="card-body">Create a CustomerController using the below command </p></div>
+         <div class="card-footer">
+          <div class="row">
+            <div class="col-10"><p id="copyfive">php artisan make:controller CustomerController</p></div>
+        </div>
+          </div>
+     </div>
+     <p class="pb-3 pt-5">Open open the app/Http/Controllers/CustomerController.php file and update it as follows </p>
+     <p>Here we define four methods to perform CRUD operation</p>
+     <div class="card">
+       <div class="card-body">
+         <code>
+          use App\Models\Customer;<br>
+          use Illuminate\Http\Request;<br>
+          use DataTables;<br>
+          class CustomerController extends Controller<br>
+{<br><br>
+  <div style="margin-left: 5%">
+    public function index(Request $request)<br>
+    {<br>
+        &nbsp;&nbsp;if ($request->ajax())<br> &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+          <div style="margin-left: 10%; letter-spacing:1px">
+            $data = Customer::latest()->get();<br>
+            return Datatables::of($data)<br>
+            ->addIndexColumn()<br>
+            ->addColumn('action', function($row)<br>{<br>
+            $btn = '&lt;a&gt; href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn text-info btn-sm editCustomer">Edit&lt;/a&gt;';<br><br>
+            $btn = $btn.' &lt;a&gt href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn text-danger btn-sm deleteCustomer">Delete&lt;/a&gt';<br>
+            return $btn;<br>
+            &nbsp;&nbsp; })<br>
+            ->rawColumns(['action'])<br>
+            ->make(true);<br>
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        return view('customer');<br>
+    }<br><br>
+
+    public function store(Request $request) <br>
+    {<br>
+      <div style="margin-left: 5%; letter-spacing:1px">
+        Customer::updateOrCreate(['id' => $request->Customer_id],<br>
+                ['firstName' => $request->firstName,'lastName' => $request->lastName,  'info' => $request->info]);<br>        
+        return response()->json(['success'=>'Customer saved successfully!']);<br>
+      </div>
+    }
+    <br><br>
+    public function edit($id) <br>
+    {<br>
+      <div style="margin-left: 5%; letter-spacing:1px">
+        $Customer = Customer::find($id);<br>
+        return response()->json($Customer);<br>
+      </div>
+    } <br> <br>
+    public function destroy($id) <br>
+    { <br>
+      <div style="margin-left: 5%; letter-spacing:1px">
+        Customer::find($id)->delete();<br>
+        return response()->json(['success'=>'Customer deleted!']);<br>
+        </div>
+    } <br><br>
+    </div>
+}
+         </code>
+       </div>
+     </div>
+     <h6 class="pb-3 pt-5">Creating Laravel model</h6>
+         <div class="card">
+          <div class="card-body">Next, let's generate a Customertable model using the following command</p></div>
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-10"><p id="copyfiveone">php artisan make:model Customer</p></div>
+            </div>
+            </div>
+        </div>
+        <p class="pb-3 pt-5">Next, open the app/models/Customer.php file and update it as follows:</p>
+        <div class="card">
+          <div class="card-body">
+            protected $fillable =  ['firstName', 'lastName', 'info'];
+          </div>
+        </div>
+    </div>
+<br>
+<div class="content-six" id="six">
+  <h6 class="pb-3 pt-5"> Step 6 :Adding a Laravel 8 Route</h6>
+  <div class="card">
+    <div class="card-body">
+       <p class="pb-3">In Route/web.php add the following route<br><br>
+        use App\Http\Controllers\CustomerController;<br>
+        Route::resource('customers',CustomerController::class);</p>
+    </div>
+  </div>
+</div><br><br>
+ <div class="content-7" id="seven">
+  <h6  class="pb-3 pt-5"> Step 7 :Adding a Blade Template View</h6>
+   <div class="card">
+     <div class="card-body">
+       <pre>
+         <code>  
+  &lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+  &lt;head&gt;
+      &lt;title&gt;Laravel 6 Ajax CRUD Example&lt;/title&gt;
+      &lt;meta name="csrf-token" content=""&gt;
+      &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" /&gt;
+      &lt;link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet"&gt;
+      &lt;link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet"&gt;
+      &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"&gt;&lt;/script&gt;  
+      &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"&gt;&lt;/script&gt;
+      &lt;script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"&gt;&lt;/script&gt;
+      &lt;script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"&gt;&lt;/script&gt;
+      &lt;script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  
+  &lt;div class="container"&gt;
+      &lt;h1&gt;Customer List &lt;/h1&gt;
+      &lt;a class="btn btn-success" href="javascript:void(0)" id="createNewCustomer"&gt; Create New Customer&lt;/a&gt;
+      &lt;table class="table table-bordered data-table"&gt;
+          &lt;thead&gt;
+              &lt;tr&gt;
+                  &lt;th&gt;No&lt;/th&gt;
+                  &lt;th&gt;FirstName&lt;/th&gt;
+                  &lt;th&gt;LastName&lt;/th&gt;
+                  &lt;th&gt;Details&lt;/th&gt;
+                  &lt;th width="280px"&gt;Action&lt;/th&gt;
+              &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+          &lt;/tbody&gt;
+      &lt;/table&gt;
+  &lt;/div&gt;
+  
+  &lt;div class="modal fade" id="ajaxModel" aria-hidden="true"&gt;
+    &lt;div class="modal-dialog"&gt;
+        &lt;div class="modal-content"&gt;
+            &lt;div class="modal-header"&gt;
+                &lt;h4 class="modal-title" id="modelHeading"&gt;&lt;/h4&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-body"&gt;
+                &lt;form id="CustomerForm" name="CustomerForm" class="form-horizontal"&gt;
+                    &lt;input type="hidden" name="Customer_id" id="Customer_id"&gt;
+                    &lt;div class="form-group"&gt;
+                        &lt;label for="firstName" class="col-sm-2 control-label"&gt;firstName&lt;/label&gt;
+                        &lt;div class="col-sm-12"&gt;
+                            &lt;input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter firstName" value="" maxlength="50" required=""&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="form-group"&gt;
+                        &lt;label for="lastName" class="col-sm-2 control-label"&gt;lastName&lt;/label&gt;
+                        &lt;div class="col-sm-12"&gt;
+                            &lt;input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter lastName" value="" maxlength="50" required=""&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class="form-group"&gt;
+                        &lt;label class="col-sm-2 control-label"&gt;Details&lt;/label&gt;
+                        &lt;div class="col-sm-12"&gt;
+                            &lt;textarea id="info" name="info" required="" placeholder="Enter infos" class="form-control"&gt;&lt;/textarea&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                    &lt;div class="col-sm-offset-2 col-sm-10"&gt;
+                      &lt;button type="submit" class="btn btn-primary" id="saveBtn" value="create"&gt;Save changes
+                      &lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  
+  &lt;/body&gt;
+  
+  &lt;script type="text/javascript"&gt;
+  $(function () {
+
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+  });
+
+  var table = $('.data-table').DataTable({
+      serverSide: true,
+      ajax: "",
+      pageLength : 5,
+      lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'All']],
+      columns: [
+          {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+          {data: 'firstName', name: 'firstName'},
+          {data: 'lastName', name: 'lastName'},
+          {data: 'info', name: 'info'},
+          {data: 'action', name: 'action', orderable: false, searchable: false},
+      ]
+  });
+
+  $('#createNewCustomer').click(function () {
+      $('#saveBtn').val("create-Customer");
+      $('#Customer_id').val('');
+      $('#CustomerForm').trigger("reset");
+      $('#modelHeading').html("Create New Customer");
+      $('#ajaxModel').modal('show');
+  });
+
+
+
+  $('body').on('click', '.editCustomer', function () {
+    var Customer_id = $(this).data('id');
+    $.get("customers" +'/' + Customer_id +'/edit', function (data) {
+        $('#modelHeading').html("Edit Customer");
+        $('#saveBtn').val("edit-user");
+        $('#ajaxModel').modal('show');
+        $('#Customer_id').val(data.id);
+        $('#firstName').val(data.firstName);
+        $('#lastName').val(data.lastName);
+        $('#info').val(data.info);
+    })
+ });
+
+
+  $('#saveBtn').click(function (e) {
+      e.preventDefault();
+      $.ajax({
+        data: $('#CustomerForm').serialize(),
+        url: "",
+        type: "POST",
+        dataType: 'json',
+        success: function (data) {
+
+            $('#CustomerForm').trigger("reset");
+            $('#ajaxModel').modal('hide');
+            table.draw();
+
+        },
+        error: function (data) {
+            console.log('Error:', data);
+            $('#saveBtn').html('Save Changes');
+        }
+    });
+  });
+
+
+  $('body').on('click', '.deleteCustomer', function () {
+      var Customer_id = $(this).data("id");
+      confirm("Are You sure want to delete !");
+      $.ajax({
+          type: "DELETE",
+          url: "customers/"+Customer_id,
+          data: {
+                 _token: '{!! csrf_token() !!}',
+               },
+          success: function (data) {
+              table.draw();
+          },
+          error: function (data) {
+              console.log('Error:', data);
+          }
+      });
+  });
+
+});
+  &lt;/script&gt;
+  &lt;/html&gt;
+</code>
+</pre>
+</div>
+</div>
+ </div>
+ <div class="content-eight" id="eight">
+   <h6 class="pb-3 pt-5">Step 8 : Serving the Laravel 8 Application</h6>
+   <div class="card">
+     <div class="card-body">
+       <p>In the terminal enter the following command</p>
+      </div>
+       <div class="card-footer">
+        <div class="row">
+          <div class="col-10"><p id="copyeight">php artisan serve</p></div>
+      </div>
+         </div>
+   </div>
+   <p class="pb-3 pt-5">Next open your web browser and navigate to the http://localhost:8000/customers</p>
+ </div>
+
+    </div>
+    <!-- end of content -->
+  </div>
+  <br><br><br><br><br>
+  <!-- end of container -->
+  <nav class="navbar fixed-bottom navbar-light bg-secondary text-light mt-5">
+    <div class="container-fluid d-flex">
+      <a class="navbar-brand" href="#top"><button class="button"><i class="fas fa-arrow-up text-white"></i></button></a>
+      <p><i class="fas fa-envelope-open-text pt-2"></i>  &nbsp;thewavecoder@gmail.com</p>
+      <footer>Copyright &copy; 2021 The Wavecoder</footer>
+    </div>
+  </nav>
+</body>
+</html>

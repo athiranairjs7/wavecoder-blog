@@ -1,0 +1,33 @@
+.rounded-circles{
+    width: 55%;
+    height: 30%;
+    margin-left: 28%;
+    margin-top: 2%;
+  
+}
+.section{
+    margin-top: 20px;
+    padding: 0 15%;
+   
+}
+/* .text-body{
+    font-family: 'Source Code Pro', monospace;
+} */
+
+.content{
+    padding: 0 15%;
+}
+a{
+    text-decoration: none;
+}
+.button {
+    background-color: var(--secondary-color);
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /* margin: 4px 2px; */
+    border-radius: 50%;
+  }
